@@ -1,0 +1,15 @@
+.nav{
+    background-color: #000000;
+    display: flex;
+    flex-wrap: nowrap;
+    direction: rtl;
+    align-items: flex-end;
+    color: black;
+    margin-bottom: 21px;
+  }
+  .nav-button{
+    width: 15%;
+    margin: 7px;
+    background-color: #fff;
+    color: #000000;
+  }

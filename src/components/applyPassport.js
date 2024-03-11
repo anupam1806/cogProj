@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./applyPassport.css";
 import {
   CitySelect,
@@ -8,8 +9,46 @@ import {
 import "react-country-state-city/dist/react-country-state-city.css";
 
 function ApplyPassport() {
+  const [userId, setUserId] = useState("");
   const [countryid, setCountryid] = useState(0);
   const [stateid, setstateid] = useState(0);
+  const [countryName, setCountryName] = useState("");
+  const [pincode, setPincode] = useState("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/applyPassport", {
+        pincode: pincode,
+        stateid: stateid,
+        // dob: dob,
+        // address: address,
+        // contact: contact,
+        // email: email,
+        // qualification: qualification,
+        // gender: gender,
+        // applyType: applyType,
+        // hint: hint,
+        // hintAnswer: hintAnswer
+      })
+      .then((res) => {
+        // const { userId, password } = res.data;
+        // alert(`Your user Id is ${userId} and password is ${password}.`)
+        // navigate('/signin')
+        console.log(res);
+        // setFirst("");
+        // setLast("");
+        // setDob("");
+        // setAddress("");
+        // setContact("");
+        // setEmail("");
+        // setQualification("");
+        // setGender("");
+        // setApplyType("");
+        // setHint("");
+        // setHintAns("");
+      });
+  };
 
   return (
     <div>
@@ -17,18 +56,19 @@ function ApplyPassport() {
         <h1>Passport Registration</h1>
       </div>
       <div className="mainform">
-        <form action="*">
+        <form action="*" onSubmit={submitHandler}>
           <div className="container">
             <label for="id">
               <b>User Id</b>
             </label>
-            <input type="text" placeholder="Enter User Id" name="id" required />
+            <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} placeholder="Enter User Id" name="id" disabled />
 
             <div>
               <label for="country">
                 <b>Country</b>
               </label>
               <CountrySelect
+              value={countryName}
                 onChange={(e) => {
                   setCountryid(e.id);
                 }}
@@ -64,7 +104,10 @@ function ApplyPassport() {
             <input
               type="number"
               placeholder="Enter Pincode"
+              maxLength="6"
               minLength="6"
+              value={pincode}
+              onChange={(e) => setPincode(e.target.value)}
               name="pincode"
               required
             />

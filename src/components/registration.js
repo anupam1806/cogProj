@@ -2,22 +2,60 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./registration.css";
 import Navbar from "./navbar/navbar";
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirst] = useState("");
+  const [lastName, setLast] = useState("");
+  const [dob,setDob] = useState("");
+  const [address,setAddress] = useState("");
+  const [contact,setContact] = useState("");
+  const [email,setEmail] = useState("");
+  const [qualification,setQualification] = useState("");
+  const [gender,setGender] = useState("");
+  const [applyType,setApplyType] = useState("");
+  const [hint,setHint] = useState("");
+  const [hintAnswer,setHintAns] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setApplyType(e.target.value);
+    console.log('Selected value:', e.target.value);
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:8000/submit", {
-        username: username,
-        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        dob: dob,
+        address: address,
+        contact: contact,
+        email: email,
+        qualification: qualification,
+        gender: gender,
+        applyType: applyType,
+        hint: hint,
+        hintAnswer: hintAnswer
       })
-      .then((data) => {
-        console.log(data);
-        setUsername("");
-        setPassword("");
+      .then((res) => {
+        const { userId, password } = res.data;
+        alert(`Your user Id is ${userId} and password is ${password}.`)
+        navigate('/signin')
+        console.log(res);
+        setFirst("");
+        setLast("");
+        setDob("");
+        setAddress("");
+        setContact("");
+        setEmail("");
+        setQualification("");
+        setGender("");
+        setApplyType("");
+        setHint("");
+        setHintAns("");
       });
   };
 
@@ -36,10 +74,10 @@ function Registration() {
             <input
               type="text"
               id="first"
-              value={username}
+              value={firstName}
               placeholder="Enter First Name"
               name="first"
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setFirst(e.target.value)}
               required
             />
             <label htmlFor="last">
@@ -48,10 +86,10 @@ function Registration() {
             <input
               type="text"
               id="sur"
-              // value={username}
+              value={lastName}
               placeholder="Enter Sur Name"
               name="sur"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setLast(e.target.value)}
               required
             />
             <label htmlFor="email">
@@ -60,10 +98,10 @@ function Registration() {
             <input
               type="date"
               id="dob"
-              // value={username}
+              value={dob}
               placeholder="Enter DOB"
               name="dob"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setDob(e.target.value)}
               required
             />
             <label htmlFor="email">
@@ -72,10 +110,10 @@ function Registration() {
             <textarea
               type="text"
               id="address"
-              // value={username}
+              value={address}
               placeholder="Enter Address"
               name="address"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setAddress(e.target.value)}
               required
             />
             <label htmlFor="email">
@@ -84,11 +122,11 @@ function Registration() {
             <input
               type="text"
               id="contact"
-              // value={username}
+              value={contact}
               placeholder="Enter Contact"
               name="contact"
               maxlength="10"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setContact(e.target.value)}
               required
             />
             <label htmlFor="email">
@@ -97,11 +135,11 @@ function Registration() {
             <input
               type="email"
               id="email"
-              // value={username}
+              value={email}
               placeholder="Enter Email"
               name="email"
             
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <label htmlFor="email">
@@ -110,33 +148,32 @@ function Registration() {
             <input
               type="text"
               id="qualification"
-              // value={username}
+              value={qualification}
               placeholder="Enter Qualification"
               name="qualification"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setQualification(e.target.value)}
               required
             />
             <label htmlFor="email">
               <b>Gender</b>
             </label>
-            <select name="dog-names" id="dog-names">
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="NA">NA</option>
               <option value="m">Male</option>
               <option value="f">Female</option>
             </select>
             <label htmlFor="email">
               <b>Apply Type</b>
             </label>
-            <input
-              type="text"
-              id="apply"
-              // value={username}
-              placeholder="Enter Apply Type"
-              name="apply"
-              // onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+            <select value={applyType} onChange={handleChange}>
+            <option value="NA">NA</option>
+              <option value="Passport">Passport</option>
+              <option value="Visa">Visa</option>
+            </select>
             <label htmlFor="email"><b>Hint Question</b> </label>
-            <select name="dog-names" id="dog-names">
+            <select value={hint} onChange={(e) => setHint(e.target.value)}>
+            <option value="NA">NA</option>
+            
               <option value="q1">What is your pet name?</option>
               <option value="q2">When is your birthday?</option>
               <option value="q3">Favourite place?</option>
@@ -150,26 +187,12 @@ function Registration() {
             <input
               type="text"
               id="answer"
-              // value={username}
+              value={hintAnswer}
               placeholder="Enter Question Hint Answer"
               name="answer"
-              // onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setHintAns(e.target.value)}
               required
             />
-
-          {/*} <label htmlFor="psw">
-              <b>Password (Minimum 8 characters)</b>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              value={password}
-              name="psw"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              disabled
-            />
-  */}
 
             <div className="clearfix">
               <button type="button" className="cancelbtn">

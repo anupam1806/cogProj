@@ -4,16 +4,16 @@ import "./registration.css";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [userId, setUserId] = useState("");
+  const [contact, setContact] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   const auth = (e) => {
     e.preventDefault();
       axios.post("http://localhost:8000/authenticate", {
-        name: name,
-        number: number,
+        userId: userId,
+        contact: contact,
         password: password,
       }).then(res =>{
         if(res.data.Login){
@@ -38,10 +38,10 @@ function Login() {
           </label>
           <input
             type="text"
-            placeholder="Enter Name"
+            placeholder="Enter UserId"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
             required
           />
           <label htmlFor="contact">
@@ -51,9 +51,9 @@ function Login() {
             type="number"
             placeholder="Enter Contact number"
             name="number"
-            value={number}
+            value={contact}
             maxlength="10"
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={(e) => setContact(e.target.value)}
             required
           />
           <label htmlFor="psw">

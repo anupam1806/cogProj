@@ -7,6 +7,7 @@ import ApplyPassport from "./components/applyPassport";
 import ApplyVisa from "./components/applyVisa";
 import RenewPassport from "./components/renewPassporty";
 import CancelVisa from "./cancelVisa";
+import Select from "./components/select";
 // import Button from "./components/delete/button";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <Routes>
         <Route exact path="/" element={<Home />}></Route>
+        <Route exact path="/select" element={<Select />}></Route>
           <Route exact path="/signup" element={<Registration />}></Route>
           <Route exact path="/signin" element={<Login />}></Route>
           <Route exact path="/passport" element={<ApplyPassport />}></Route>

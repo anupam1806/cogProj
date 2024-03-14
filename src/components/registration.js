@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../components/navbar/navbar.css";
 import "./registration.css";
-import Navbar from "./navbar/navbar";
-import { useNavigate } from "react-router-dom";
+// import Navbar from "./navbar/navbar";
+import { useNavigate,Link } from "react-router-dom";
 
 function Registration() {
   const [firstName, setFirst] = useState("");
@@ -41,10 +42,17 @@ function Registration() {
         hintAnswer: hintAnswer
       })
       .then((res) => {
-        const { userId, password } = res.data;
+        // const { userId, password } = data.;
+        const userId = res.data.userId;
+        const password = res.data.password;
+        // console.log(userId);
+        // console.log(password);
+        // alert(password);
         alert(`Your user Id is ${userId} and password is ${password}.`)
+        // console.log(res.data);
+        
         navigate('/signin')
-        console.log(res);
+        // console.log(res);
         setFirst("");
         setLast("");
         setDob("");
@@ -61,7 +69,11 @@ function Registration() {
 
   return (
     <>
-      <Navbar />
+      <nav className="nav">
+        <Link to="/signin">
+          <button className="nav-button">Login</button>
+        </Link>
+      </nav>
       <div className="mainform">
         <form className="modal-content" onSubmit={submitHandler}>
           <div className="container">

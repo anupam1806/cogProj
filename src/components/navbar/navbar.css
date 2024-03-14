@@ -5,11 +5,12 @@
     direction: rtl;
     align-items: flex-end;
     color: black;
-    margin-bottom: 21px;
+    
   }
   .nav-button{
-    width: 15%;
+    width: 95%;
     margin: 7px;
     background-color: #fff;
     color: #000000;
+    margin-bottom: 7px;
   }

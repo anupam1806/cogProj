@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./registration.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 function Login() {
   const [userId, setUserId] = useState("");
@@ -17,7 +17,7 @@ function Login() {
         password: password,
       }).then(res =>{
         if(res.data.Login){
-          navigate('/passport')
+          navigate('/select')
         } else{
           alert("Not a valid User");
         }
@@ -28,6 +28,11 @@ function Login() {
 
   return (
     <div>
+      <nav className="nav">
+        <Link to="/signup">
+          <button className="nav-button">Register</button>
+        </Link>
+      </nav>
       <form className="modal-content" onSubmit={auth}>
         <div className="container">
           <h1>Sign In</h1>

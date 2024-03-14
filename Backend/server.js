@@ -17,6 +17,8 @@ const db = mysql.createConnection({
   database: "my_db",
 });
 
+
+
 function getLastUserID(applyType) {
 
   if (applyType === 'Passport') {
@@ -30,15 +32,15 @@ function generateNextUserID(applyType) {
   const lastUserID = getLastUserID(applyType);
 
   if (typeof lastUserID === 'string') {
-    const numericPart = parseFloat(lastUserID.split('-')[1]);
-
-    const nextNumericPart = numericPart + 1;
+    // const numericPart = parseFloat(lastUserID.split('-')[1]);
+    const randomThreeDigitNumber = Math.floor(Math.random() * 9000) + 1000;
+    // const nextNumericPart = numericPart + 1;
 
     let nextUserID;
     if (applyType === 'Passport') {
-      nextUserID = `PASS-${nextNumericPart.toFixed(0)}`;
+      nextUserID = `PASS-${randomThreeDigitNumber.toFixed(0)}`;
     } else if (applyType === 'Visa') {
-      nextUserID = `VISA-${nextNumericPart.toFixed(4)}`;
+      nextUserID = `VISA-${randomThreeDigitNumber.toFixed(4)}`;
     }
 
     return nextUserID;
@@ -99,6 +101,84 @@ app.post("/submit", (req, res) => {
       if (err) {
         console.log(err);
       } else {
+        const responseObj = {
+          userId: userId,
+          password: password,
+        };
+        res.json(responseObj);
+      }
+    }
+  );
+});
+
+app.post("/applyvisa", (req, res) => {
+  const users = req.body.users;
+  const countryid = req.body.countryid;
+  const occupation = req.body.occupation;
+  const date = req.body.date;
+
+    // const maxPassportNumber = 1000;
+    const randomThreeDigitNumber = Math.floor(Math.random() * 9000) + 1000;
+    let applicationPermit = 0;
+    let visaApp;
+    // const nextPassportNumber = randomThreeDigitNumber + 1;
+    if(occupation === 'Student'){
+      applicationPermit="2";
+      visaApp = `STU-${randomThreeDigitNumber}`;
+      console.log(`Visa Number: STU-${randomThreeDigitNumber}`);
+    }
+    else if(occupation === 'Private Employee'){
+      applicationPermit="3";
+      visaApp = `PE-${randomThreeDigitNumber}`;
+      console.log(`Visa Number: PE-${randomThreeDigitNumber}`);
+    }
+    else if(occupation === 'Government Employee'){
+      applicationPermit="4";
+      visaApp = `GE-${randomThreeDigitNumber}`
+      console.log(`Visa Number: GE-${randomThreeDigitNumber}`);
+    }
+    else if(occupation === 'Self Employed'){
+      applicationPermit="1";
+      visaApp = `SE-${randomThreeDigitNumber}`;
+      console.log(`Visa Number: SE-${randomThreeDigitNumber}`);
+    }
+    else if(occupation === 'Retire Employee'){
+      applicationPermit="1.5";
+      visaApp = `RE-${randomThreeDigitNumber}`;
+      console.log(`Visa Number: RE-${randomThreeDigitNumber}`);
+    }
+  console.log(`Application Permit: ${applicationPermit}`);
+
+  db.query(
+    "INSERT INTO apply_visa (User_id,Country,Occupation,Application_Date) VALUES(?,?,?,?)",
+    [users,countryid,occupation,date],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const responseObj = {
+          visaApp: visaApp,
+          applicationPermit: applicationPermit,
+        };
+        res.json(responseObj);
+      }
+    }
+  );
+});
+
+app.post("/cancel", (req, res) => {
+  const userId = req.body.userId;
+  // const passport = req.body.passport;
+  // const visa = req.body.visa;
+  // const doi = req.body.doi;
+
+  db.query(
+    "DELETE FROM apply_visa where User_id=?",
+    [userId],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
         res.send(result);
       }
     }
@@ -131,46 +211,149 @@ app.post('/authenticate',(req, res) => {
 });
 
 app.post("/applyPassport", (req, res) => {
+  const userId = req.body.userId;
+  const countryid = req.body.countryid;
   const stateid = req.body.stateid;
-  const countryName = req.body.countryName;
-  console.log(stateid);
-  // const lastName = req.body.lastName;
-  // const dob = req.body.dob;
-  // const address = req.body.address;
-  // const contact = req.body.contact;
-  // const email = req.body.email;
-  // const qualification = req.body.qualification;
-  // const gender = req.body.gender;
-  // const applyType = req.body.applyType;
-  // const hint = req.body.hint;
-  // const hintAnswer = req.body.hintAnswer;
-  // var userId,password;
+  const cityid = req.body.cityid;
+  const pincode = req.body.pincode;
+  const booklet = req.body.booklet;
+  const typeService = req.body.typeService;
+  let issue = req.body.issue;
 
+    // const maxPassportNumber = 1000;
+    const randomThreeDigitNumber = Math.floor(Math.random() * 9000) + 1000;
+    // const nextPassportNumber = randomThreeDigitNumber + 1;
+    let passportNumber;
+    if(booklet === '30'){
+      passportNumber = `FPS-30${randomThreeDigitNumber}`;
+      console.log(`Next Passport Number: FPS-30${randomThreeDigitNumber}`);
+    }
+    else if(booklet === '60'){
+      passportNumber = `FPS-60${randomThreeDigitNumber}`;
+      console.log(`Next Passport Number: FPS-60${randomThreeDigitNumber}`);
+    }
+    issue = new Date(issue);
+    const expiryDate = new Date(issue);
+    let expiry =  expiryDate.setFullYear(expiryDate.getFullYear() + 10);
   
-  // if(applyType === "NA"){
-  //   console.log("NA");}
-  //   else if(applyType === "Passport"){
-  //     userId = generateNextUserID('Passport');
-  //     password = generatePassword();
-  //     console.log(`Generated password: ${password}`);
-  //     console.log(`id: ${userId}`);
-  //   } else if(applyType === "Visa"){
-  //     userId = generateNextUserID('Visa');
-  //     password = generatePassword();
-  //     console.log(`Generated password: ${password}`);
-  //     console.log(`id: ${userId}`);
-  //   }
+  let applicationCost = 0;
+  if (typeService === 'normal') {
+    applicationCost = 2500;
+  } else if (typeService === 'tatkal') {
+    applicationCost = 5000;
+  }
+  console.log(`Passport Expiry Date: ${expiryDate}`);
+  console.log(`Application cost: ${applicationCost}`);
+  console.log(`Expiry Date: ${expiry}`);
 
   db.query(
-    "SELECT User_Id FROM user_reg",
+    "INSERT INTO apply_passport (User_id,Country,State,City,Pincode,ServiceType,BookletType,Issued_date) VALUES(?,?,?,?,?,?,?,?)",
+    [userId,countryid,stateid, cityid,pincode,typeService,booklet,issue],
     (err, result) => {
       if (err) {
         console.log(err);
       } else {
-        res.send(result);
+        const responseObj = {
+          passportNumber: passportNumber,
+          applicationCost: applicationCost,
+          expiry: expiry
+        };
+        res.json(responseObj);
       }
     }
   );
+});
+
+app.post("/renewPassport", (req, res) => {
+  const reason = req.body.reason
+  const userId = req.body.userId;
+  const countryid = req.body.countryid;
+  const stateid = req.body.stateid;
+  const cityid = req.body.cityid;
+  const pincode = req.body.pincode;
+  const booklet = req.body.booklet;
+  const typeService = req.body.typeService;
+  let issue = req.body.issue;
+
+  const randomThreeDigitNumber = Math.floor(Math.random() * 9000) + 1000;
+    // const nextPassportNumber = randomThreeDigitNumber + 1;
+    let passportNumber;
+    if(booklet === '30'){
+      passportNumber = `FPS-30${randomThreeDigitNumber}`;
+      console.log(`Next Passport Number: FPS-30${randomThreeDigitNumber}`);
+    }
+    else if(booklet === '60'){
+      passportNumber = `FPS-60${randomThreeDigitNumber}`;
+      console.log(`Next Passport Number: FPS-60${randomThreeDigitNumber}`);
+    }
+    issue = new Date(issue);
+    const expiryDate = new Date(issue);
+    let expiry =  expiryDate.setFullYear(expiryDate.getFullYear() + 10);
+  
+  let applicationCost = 0;
+  if (typeService === 'normal') {
+    applicationCost = 2500;
+  } else if (typeService === 'tatkal') {
+    applicationCost = 5000;
+  }
+  console.log(`Passport Expiry Date: ${expiryDate}`);
+  console.log(`Application cost: ${applicationCost}`);
+  console.log(`Expiry Date: ${expiry}`);
+
+  const query = `
+    UPDATE apply_passport
+    SET Country = ?,
+        State = ?,
+        City = ?,
+        Pincode = ?,
+        ServiceType = ?,
+        BookletType = ?,
+        Issued_date = ?,
+        reason_for_renewal = ?
+    WHERE User_id = ?;
+  `;
+
+  db.query(
+    query,
+    [countryid,stateid, cityid,pincode,typeService,booklet,issue,reason,userId],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const responseObj = {
+          passportNumber: passportNumber,
+          applicationCost: applicationCost,
+          expiry: expiry
+        };
+        res.json(responseObj);
+      }
+    }
+  );
+});
+
+app.get('/api', (req, res) => {
+  const query = 'SELECT * FROM User_Reg'; // Replace with your table name
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching data from MySQL:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+app.get('/renew', (req, res) => {
+  const query = 'SELECT * FROM region'; // Replace with your table name
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching data from MySQL:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(results);
+    }
+  });
 });
 
 app.listen(8000, () => {

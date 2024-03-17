@@ -6,12 +6,17 @@ import "./applyPassport.css";
 //   CountrySelect,
 //   StateSelect,
 // } from "react-country-state-city";
+import {  useNavigate } from "react-router-dom";
 import "react-country-state-city/dist/react-country-state-city.css";
 
 function RenewPassport() {
+
+  axios.defaults.withCredentials = true
+
+  const navigate = useNavigate();
+
   // const [countryid, setCountryid] = useState(0);
   const [reason, setReason] = useState("");
-  const [userId, setUserId] = useState("");
   const [countryid, setCountryid] = useState("");
   const [stateid, setStateid] = useState("");
  const [cityid,setCityid] = useState("");
@@ -21,7 +26,21 @@ function RenewPassport() {
   const [issue, setIssue] = useState("");
 
   const [coi, setCoi] = useState([]);
-  // const [users, setUsers] = useState([]);
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/username")
+    .then( res => {
+      if(res.data.valid){
+        setUser(res.data.user)
+      }
+      else{
+        navigate("/signin");
+      }
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+  }, [navigate]);
   
   useEffect(() => {
     fetch('http://localhost:8000/renew')
@@ -35,7 +54,7 @@ function RenewPassport() {
     axios
       .post("http://localhost:8000/renewPassport", {
         reason: reason,
-        userId: userId,
+        user: user,
         countryid: countryid,
         stateid: stateid,
         cityid: cityid,
@@ -49,6 +68,7 @@ function RenewPassport() {
         const applicationCost = res.data.applicationCost;
         // const expiry = res.data.expiry;
         alert(`Your new Passport number is ${passportNumber} and Application Cost is ${applicationCost}.`)
+        navigate("/confirmation");
         console.log(res);
         setCountryid("");
         setStateid("");
@@ -75,7 +95,13 @@ function RenewPassport() {
             <label htmlFor="id">
               <b>User Id</b>
             </label>
-            <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} placeholder="Enter Reason of Renewal" name="id" required />
+            <input
+              type="text"
+              placeholder="Enter User Id"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              required
+            />
 
             <div>
               <label htmlFor="country">

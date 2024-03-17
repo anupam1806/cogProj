@@ -3,16 +3,36 @@ import axios from "axios";
 // import {
 //   CountrySelect
 // } from "react-country-state-city";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-country-state-city/dist/react-country-state-city.css";
 
 function ApplyVisa() {
+
+  axios.defaults.withCredentials = true
+
+  const navigate = useNavigate();
+
   const [occupation, setOccupation] = useState("");
   const [countryid, setCountryid] = useState("");
   const [date, setDate] = useState("");
   const [coi, setCoi] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState("");
+  const [, setUsers] = useState([]);
+  const [, setUserId] = useState("");
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/username")
+    .then( res => {
+      if(res.data.valid){
+        setUser(res.data.user)
+      }
+      else{
+        navigate("/signin");
+      }
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+  }, [navigate]);
 
   useEffect(() => {
     fetch("http://localhost:8000/renew")
@@ -25,7 +45,7 @@ function ApplyVisa() {
     e.preventDefault();
     axios
       .post("http://localhost:8000/applyvisa", {
-        userId: userId,
+        user: user,
         countryid: countryid,
         occupation: occupation,
         date: date,
@@ -33,10 +53,8 @@ function ApplyVisa() {
       .then((res) => {
         const visa = res.data.visaApp;
         const cost = res.data.applicationPermit;
-        // const { userId, password } = res.data;
         alert(`Your visa number is ${visa} and Permit is ${cost} years.`);
-        // navigate('/signin')
-        // console.log(res);
+        navigate('/confirmation')
         setUserId("");
         setCountryid("");
         setOccupation("");
@@ -65,17 +83,13 @@ function ApplyVisa() {
             <label for="id">
               <b>User Id</b>
             </label>
-            <select
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
-              disabled
-            >
-              {users.map((user) => (
-                <option value={user.User_id} key={user.id}>
-                  {user.User_id}
-                </option>
-              ))}
-            </select>
+            <input
+              type="text"
+              placeholder="Enter User Id"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              required
+            />
 
             <label for="country">
               <b>Country</b>

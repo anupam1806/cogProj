@@ -2,13 +2,29 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["POST", "GET"],
+  credentials: true
+}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24
+  }
+}))
 
 const db = mysql.createConnection({
   host: "localhost",
@@ -112,7 +128,7 @@ app.post("/submit", (req, res) => {
 });
 
 app.post("/applyvisa", (req, res) => {
-  const users = req.body.users;
+  const user = req.body.user;
   const countryid = req.body.countryid;
   const occupation = req.body.occupation;
   const date = req.body.date;
@@ -151,7 +167,7 @@ app.post("/applyvisa", (req, res) => {
 
   db.query(
     "INSERT INTO apply_visa (User_id,Country,Occupation,Application_Date) VALUES(?,?,?,?)",
-    [users,countryid,occupation,date],
+    [user,countryid,occupation,date],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -167,14 +183,14 @@ app.post("/applyvisa", (req, res) => {
 });
 
 app.post("/cancel", (req, res) => {
-  const userId = req.body.userId;
+  const user = req.body.user;
   // const passport = req.body.passport;
   // const visa = req.body.visa;
   // const doi = req.body.doi;
 
   db.query(
     "DELETE FROM apply_visa where User_id=?",
-    [userId],
+    [user],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -184,6 +200,15 @@ app.post("/cancel", (req, res) => {
     }
   );
 });
+
+app.get('/username' , (req,res) => {
+  if(req.session.user){
+    return res.json({valid: true, user: req.session.user})
+  }
+  else{
+    return res.json({valid: false});
+  }
+})
 
 app.post('/authenticate',(req, res) => {
 
@@ -201,6 +226,7 @@ app.post('/authenticate',(req, res) => {
         console.log(err);
       } 
       if(result.length > 0){
+        req.session.user = result[0].User_id;
         return res.json({Login:true})
       }
       else{
@@ -211,7 +237,7 @@ app.post('/authenticate',(req, res) => {
 });
 
 app.post("/applyPassport", (req, res) => {
-  const userId = req.body.userId;
+  const user = req.body.user;
   const countryid = req.body.countryid;
   const stateid = req.body.stateid;
   const cityid = req.body.cityid;
@@ -248,7 +274,7 @@ app.post("/applyPassport", (req, res) => {
 
   db.query(
     "INSERT INTO apply_passport (User_id,Country,State,City,Pincode,ServiceType,BookletType,Issued_date) VALUES(?,?,?,?,?,?,?,?)",
-    [userId,countryid,stateid, cityid,pincode,typeService,booklet,issue],
+    [user,countryid,stateid, cityid,pincode,typeService,booklet,issue],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -266,7 +292,7 @@ app.post("/applyPassport", (req, res) => {
 
 app.post("/renewPassport", (req, res) => {
   const reason = req.body.reason
-  const userId = req.body.userId;
+  const user = req.body.user;
   const countryid = req.body.countryid;
   const stateid = req.body.stateid;
   const cityid = req.body.cityid;
@@ -315,7 +341,7 @@ app.post("/renewPassport", (req, res) => {
 
   db.query(
     query,
-    [countryid,stateid, cityid,pincode,typeService,booklet,issue,reason,userId],
+    [countryid,stateid, cityid,pincode,typeService,booklet,issue,reason,user],
     (err, result) => {
       if (err) {
         console.log(err);

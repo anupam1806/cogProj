@@ -8,6 +8,7 @@ import ApplyVisa from "./components/applyVisa";
 import RenewPassport from "./components/renewPassporty";
 import CancelVisa from "./cancelVisa";
 import Select from "./components/select";
+import Confirmation from "./components/confirm";
 // import Button from "./components/delete/button";
 
 function App() {
@@ -15,14 +16,19 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-        <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="/select" element={<Select />}></Route>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route exact path="/select" element={<Select />}></Route>
           <Route exact path="/signup" element={<Registration />}></Route>
           <Route exact path="/signin" element={<Login />}></Route>
           <Route exact path="/passport" element={<ApplyPassport />}></Route>
           <Route exact path="/visa" element={<ApplyVisa />}></Route>
-          <Route exact path="/renewpassport" element={<RenewPassport />}></Route>
+          <Route
+            exact
+            path="/renewpassport"
+            element={<RenewPassport />}
+          ></Route>
           <Route exact path="/cancelvisa" element={<CancelVisa />}></Route>
+          <Route exact path="/confirmation" element={<Confirmation />}></Route>
         </Routes>
       </Router>
 

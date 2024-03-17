@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./registration.css";
 import { useNavigate,Link } from "react-router-dom";
@@ -9,6 +9,23 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
+  axios.defaults.withCredentials = true
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/username")
+    .then( res => {
+      if(res.data.valid){
+        navigate("/select");
+      }
+      else{
+        navigate("/signin");
+      }
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+  }, [navigate]);
+
   const auth = (e) => {
     e.preventDefault();
       axios.post("http://localhost:8000/authenticate", {
@@ -33,6 +50,7 @@ function Login() {
           <button className="nav-button">Register</button>
         </Link>
       </nav>
+      <div className="mainform">
       <form className="modal-content" onSubmit={auth}>
         <div className="container">
           <h1>Sign In</h1>
@@ -85,6 +103,7 @@ function Login() {
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 }

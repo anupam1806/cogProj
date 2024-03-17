@@ -34,4 +34,4 @@ function Delete() {
   )
 }
 
-export default Delete
+export default Delete;

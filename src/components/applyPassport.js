@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./applyPassport.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import {
 //   CitySelect,
 //   CountrySelect,
@@ -12,9 +12,10 @@ import "react-country-state-city/dist/react-country-state-city.css";
 
 function ApplyPassport() {
 
-  // const { isAuthenticated, login, logout } = useAuth();
+  axios.defaults.withCredentials = true
 
-  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+  // const { isAuthenticated, login, logout } = useAuth();
   const [countryid, setCountryid] = useState("");
   const [stateid, setStateid] = useState("");
   const [cityid, setCityid] = useState("");
@@ -24,9 +25,23 @@ function ApplyPassport() {
   const [booklet, setBooklet] = useState("");
   const [typeService, setTypeService] = useState("");
   const [issue, setIssue] = useState("");
-
   const [coi, setCoi] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [, setUsers] = useState([]);
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/username")
+    .then( res => {
+      if(res.data.valid){
+        setUser(res.data.user)
+      }
+      else{
+        navigate("/signin");
+      }
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+  }, [navigate]);
 
   useEffect(() => {
     fetch("http://localhost:8000/renew")
@@ -46,7 +61,7 @@ function ApplyPassport() {
     e.preventDefault();
     axios
       .post("http://localhost:8000/applyPassport", {
-        userId: userId,
+        user: user,
         countryid: countryid,
         stateid: stateid,
         cityid: cityid,
@@ -60,7 +75,7 @@ function ApplyPassport() {
         const applicationCost = res.data.applicationCost;
         // const expiry = res.data.expiry;
         alert(`Your Passport number is ${passportNumber} and Application Cost is ${applicationCost}.`)
-        // navigate('/signin')
+        navigate('/confirmation');
         console.log(res);
         setCountryid("");
         setStateid("");
@@ -90,7 +105,16 @@ function ApplyPassport() {
             <label htmlFor="id">
               <b>User Id</b>
             </label>
-            <label
+
+
+            <input
+              type="text"
+              placeholder="Enter User Id"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              required
+            />
+            {/* <label
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               disabled
@@ -100,7 +124,7 @@ function ApplyPassport() {
                   {user.User_id}
                 </label>
               ))}
-            </label>
+            </label> */}
             <div>
               <label htmlFor="country">
                 <b>Country</b>
@@ -239,12 +263,6 @@ function ApplyPassport() {
           </div>
         </form>
       </div>
-      {/* </>
-      ) : (
-        <div>
-          <p>Login</p>
-        </div>
-      )} */}
     </div>
   );
 }

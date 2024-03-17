@@ -1,16 +1,23 @@
 import React from "react";
-import "./home.css";
-import { Link } from "react-router-dom";
+import "./select.css";
 
 function Select() {
   return (
     <div>
-      <Link to="/passport">
-        <button className="cancelbtn">Passport application</button>
-      </Link>
-      <Link to="/visa">
-        <button className="signup">Visa application</button>
-      </Link>
+      <div className="contai">
+          <div className="one">
+              <div className="content">
+                  <a href="/passport" className="bn">Passport</a>
+              </div>
+          </div>
+          <div className="two">
+              <div className="content">
+                  <a href="/visa" className="bn">Visa</a>
+              </div>
+          </div>
+      </div>
+
+
     </div>
   );
 }

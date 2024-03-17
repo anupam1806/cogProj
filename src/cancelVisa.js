@@ -1,24 +1,46 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Delete from "./components/delete/button";
 
 function CancelVisa() {
 
-  const [userId, setUserId] = useState("");
+  axios.defaults.withCredentials = true
+
+  const navigate = useNavigate();
+
+  const [, setUserId] = useState("");
   const [passport, setPassport] = useState("");
   const [visa,setVisa] = useState("");
   const [doi, setDoi] = useState("");
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/username")
+    .then( res => {
+      if(res.data.valid){
+        setUser(res.data.user)
+      }
+      else{
+        navigate("/signin");
+      }
+      console.log(res);
+    })
+    .catch(err => console.log(err))
+  }, [navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:8000/cancel", {
-        userId: userId,
+        user: user,
         passport: passport,
         visa: visa,
         doi: doi,
       })
       .then((res) => {
+        alert("The apllication for visa has been canceled.")
+        navigate("/confirmation");
         console.log(res);
         setUserId("");
         setPassport("");
@@ -39,7 +61,13 @@ function CancelVisa() {
             <label for="id">
               <b>User Id</b>
             </label>
-            <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} placeholder="Enter User Id" name="id" required />
+            <input
+              type="text"
+              placeholder="Enter User Id"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              required
+            />
 
             <label for="id">
               <b>Passport Number</b>

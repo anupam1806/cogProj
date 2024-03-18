@@ -89,10 +89,6 @@ function RenewPassport() {
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
           <label htmlFor="id">
-              <b>Reason of Renewal</b>
-            </label>
-            <input type="text" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="Enter Reason of Renewal" name="id" required />
-            <label htmlFor="id">
               <b>User Id</b>
             </label>
             <input
@@ -102,6 +98,10 @@ function RenewPassport() {
               onChange={(e) => setUser(e.target.value)}
               required
             />
+          <label htmlFor="id">
+              <b>Reason of Renewal</b>
+            </label>
+            <input type="text" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="Enter Reason of Renewal" name="id" required />
 
             <div>
               <label htmlFor="country">
@@ -109,7 +109,7 @@ function RenewPassport() {
               </label>
 
               <select value={countryid} onChange={(e) => setCountryid(e.target.value)}>
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               {coi.map(user => (
         <option value={user.id} key={user.id}>
           {user.country}
@@ -127,7 +127,7 @@ function RenewPassport() {
                 <b>State</b>
               </label>
               <select value={stateid} onChange={(e) => setStateid(e.target.value)}>
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               {coi.map(user => (
         <option value={user.id} key={user.id}>
           {user.state}
@@ -147,7 +147,7 @@ function RenewPassport() {
               </label>
               
               <select value={cityid} onChange={(e) => setCityid(e.target.value)}>
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               {coi.map(user => (
         <option value={user.id} key={user.id}>
           {user.city}
@@ -183,7 +183,7 @@ function RenewPassport() {
               <b>Type of Service</b>
             </label>
             <select name="dog-names" id="dog-names" value={typeService} onChange={(e) => setTypeService(e.target.value)}>
-            <option value="NA">NA</option>
+            <option value="Select--">Select--</option>
               <option value="normal">Normal</option>
               <option value="tatkal">Tatkal</option>
             </select>
@@ -192,7 +192,7 @@ function RenewPassport() {
               <b>Booklet Type</b>
             </label>
             <select name="dog-names" id="dog-names" value={booklet} onChange={(e) => setBooklet(e.target.value)}>
-            <option value="NA">NA</option>
+            <option value="Select--">Select--</option>
               <option value="60">60 Pages</option>
               <option value="30">30 Pages</option>
             </select>
@@ -203,6 +203,7 @@ function RenewPassport() {
             <input
               type="date"
               placeholder="Enter Issue Date"
+              min={new Date().toISOString().split('T')[0]}
               value={issue} onChange={(e) => setIssue(e.target.value)}
               name="date"
               required

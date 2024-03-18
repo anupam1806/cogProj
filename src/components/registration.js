@@ -80,8 +80,8 @@ function Registration() {
             <h1>Sign Up</h1>
             <p>Please fill in this form to register.</p>
             <hr />
-            <label htmlFor="first">
-              <b>First Name</b>
+            <label htmlFor="first" className="col-sm-4">
+              <b>First Name </b>
             </label>
             <input
               type="text"
@@ -92,8 +92,8 @@ function Registration() {
               onChange={(e) => setFirst(e.target.value)}
               required
             />
-            <label htmlFor="last">
-              <b>Sur Name</b>
+            <label htmlFor="last" className="col-sm-4">
+              <b>Sur Name </b>
             </label>
             <input
               type="text"
@@ -104,8 +104,8 @@ function Registration() {
               onChange={(e) => setLast(e.target.value)}
               required
             />
-            <label htmlFor="email">
-              <b>Date of Birth</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Date of Birth </b>
             </label>
             <input
               type="date"
@@ -113,11 +113,12 @@ function Registration() {
               value={dob}
               placeholder="Enter DOB"
               name="dob"
+              max={new Date().toISOString().split('T')[0]}
               onChange={(e) => setDob(e.target.value)}
               required
             />
-            <label htmlFor="email">
-              <b>Address</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Address </b>
             </label>
             <textarea
               type="text"
@@ -128,8 +129,8 @@ function Registration() {
               onChange={(e) => setAddress(e.target.value)}
               required
             />
-            <label htmlFor="email">
-              <b>Contact Number</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Contact Number </b>
             </label>
             <input
               type="text"
@@ -141,8 +142,8 @@ function Registration() {
               onChange={(e) => setContact(e.target.value)}
               required
             />
-            <label htmlFor="email">
-              <b>Email</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Email </b>
             </label>
             <input
               type="email"
@@ -154,8 +155,8 @@ function Registration() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <label htmlFor="email">
-              <b>Qualification</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Qualification </b>
             </label>
             <input
               type="text"
@@ -166,25 +167,25 @@ function Registration() {
               onChange={(e) => setQualification(e.target.value)}
               required
             />
-            <label htmlFor="email">
-              <b>Gender</b>
+            <label htmlFor="email" className="col-sm-4 ">
+              <b>Gender </b>
             </label>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option value="NA">NA</option>
+            <option value="Select--">Select--</option>
               <option value="m">Male</option>
               <option value="f">Female</option>
             </select>
-            <label htmlFor="email">
-              <b>Apply Type</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Apply Type </b>
             </label>
             <select value={applyType} onChange={handleChange}>
-            <option value="NA">NA</option>
+            <option value="Select--">Select--</option>
               <option value="Passport">Passport</option>
               <option value="Visa">Visa</option>
             </select>
-            <label htmlFor="email"><b>Hint Question</b> </label>
+            <label htmlFor="email" className="col-sm-4"><b>Hint Question </b> </label>
             <select value={hint} onChange={(e) => setHint(e.target.value)}>
-            <option value="NA">NA</option>
+            <option value="Select--">Select--</option>
             
               <option value="q1">What is your pet name?</option>
               <option value="q2">When is your birthday?</option>
@@ -192,9 +193,8 @@ function Registration() {
               <option value="q4">Which city you live in?</option>
             </select>
             
-            <label htmlFor="email">
-              
-              <b>Hint Answer</b>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Hint Answer </b>
             </label>
             <input
               type="text"
@@ -208,7 +208,7 @@ function Registration() {
 
             <div className="clearfix">
               <button type="button" className="cancelbtn">
-                Cancel
+                Reset
               </button>
               <button type="submit" className="signup">
                 Sign Up

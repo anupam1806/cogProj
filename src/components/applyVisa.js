@@ -98,7 +98,7 @@ function ApplyVisa() {
               value={countryid}
               onChange={(e) => setCountryid(e.target.value)}
             >
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               {coi.map((user) => (
                 <option value={user.id} key={user.id}>
                   {user.country}
@@ -122,7 +122,7 @@ function ApplyVisa() {
               value={occupation}
               onChange={(e) => setOccupation(e.target.value)}
             >
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               <option value="Student">Student</option>
               <option value="Private Employee">Private Employee</option>
               <option value="Government Employee">Government Employee</option>
@@ -137,6 +137,7 @@ function ApplyVisa() {
               type="date"
               placeholder="Enter Date of Application"
               value={date}
+              min={new Date().toISOString().split('T')[0]}
               onChange={(e) => setDate(e.target.value)}
               name="date"
               required

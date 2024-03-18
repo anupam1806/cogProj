@@ -28,7 +28,7 @@ function Delete() {
                     </svg>
                 </div>
             </div>
-            <span>Delete Item</span>
+            <span>Cancel Visa</span>
         </button>
     </div>
   )

@@ -87,6 +87,7 @@ function CancelVisa() {
               placeholder="Enter Date of Issue"
               name="date"
               value={doi} onChange={(e) => setDoi(e.target.value)} 
+              min={new Date().toISOString().split('T')[0]}
               required
             />
 

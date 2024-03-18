@@ -134,7 +134,7 @@ function ApplyPassport() {
                 value={countryid}
                 onChange={(e) => setCountryid(e.target.value)}
               >
-                <option value="NA">NA</option>
+                <option value="Select--">Select--</option>
                 {coi.map((user) => (
                   <option value={user.id} key={user.id}>
                     {user.country}
@@ -155,7 +155,7 @@ function ApplyPassport() {
                 value={stateid}
                 onChange={(e) => setStateid(e.target.value)}
               >
-                <option value="NA">NA</option>
+                <option value="Select--">Select--</option>
                 {coi.map((user) => (
                   <option value={user.id} key={user.id}>
                     {user.state}
@@ -179,7 +179,7 @@ function ApplyPassport() {
                 value={cityid}
                 onChange={(e) => setCityid(e.target.value)}
               >
-                <option value="NA">NA</option>
+                <option value="Select--">Select--</option>
                 {coi.map((user) => (
                   <option value={user.id} key={user.id}>
                     {user.city}
@@ -221,7 +221,7 @@ function ApplyPassport() {
               value={typeService}
               onChange={(e) => setTypeService(e.target.value)}
             >
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               <option value="normal">Normal</option>
               <option value="tatkal">Tatkal</option>
             </select>
@@ -235,7 +235,7 @@ function ApplyPassport() {
               value={booklet}
               onChange={(e) => setBooklet(e.target.value)}
             >
-              <option value="NA">NA</option>
+              <option value="Select--">Select--</option>
               <option value="60">60 Pages</option>
               <option value="30">30 Pages</option>
             </select>
@@ -247,6 +247,7 @@ function ApplyPassport() {
               type="date"
               placeholder="Enter Issue Date"
               value={issue}
+              min={new Date().toISOString().split('T')[0]}
               onChange={(e) => setIssue(e.target.value)}
               name="date"
               required

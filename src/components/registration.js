@@ -172,8 +172,8 @@ function Registration() {
             </label>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
             <option value="Select--">Select--</option>
-              <option value="m">Male</option>
-              <option value="f">Female</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
             <label htmlFor="email" className="col-sm-4">
               <b>Apply Type </b>
@@ -187,10 +187,10 @@ function Registration() {
             <select value={hint} onChange={(e) => setHint(e.target.value)}>
             <option value="Select--">Select--</option>
             
-              <option value="q1">What is your pet name?</option>
-              <option value="q2">When is your birthday?</option>
-              <option value="q3">Favourite place?</option>
-              <option value="q4">Which city you live in?</option>
+              <option value="What is your pet name?">What is your pet name?</option>
+              <option value="When is your birthday?">When is your birthday?</option>
+              <option value="Favourite place?">Favourite place?</option>
+              <option value="Which city you live in?">Which city you live in?</option>
             </select>
             
             <label htmlFor="email" className="col-sm-4">

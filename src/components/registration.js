@@ -68,12 +68,13 @@ function Registration() {
   };
 
   return (
-    <>
+    <div className="full">
       <nav className="nav">
         <Link to="/signin">
           <button className="nav-button">Login</button>
         </Link>
       </nav>
+      
       <div className="mainform">
         <form className="modal-content" onSubmit={submitHandler}>
           <div className="container">
@@ -133,11 +134,12 @@ function Registration() {
               <b>Contact Number </b>
             </label>
             <input
-              type="text"
+              type="number"
               id="contact"
               value={contact}
               placeholder="Enter Contact"
               name="contact"
+              minLength='10'
               maxlength="10"
               onChange={(e) => setContact(e.target.value)}
               required
@@ -217,7 +219,7 @@ function Registration() {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -76,7 +76,9 @@ function ApplyVisa() {
           <button className="nav-button">Visa Cancellation</button>
         </Link>
       </nav>
-      <div className="head"></div>
+      {/* <div className="head"></div> */}
+      <div className="visafull">
+      <h1 className="headvisa">Visa Registration</h1>
       <div className="mainform">
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
@@ -153,6 +155,7 @@ function ApplyVisa() {
             </div>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

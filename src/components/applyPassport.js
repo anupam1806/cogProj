@@ -96,10 +96,12 @@ function ApplyPassport() {
           <button className="nav-button">Passport Renewal</button>
         </Link>
       </nav>
-      <div className="header">
-        <h1>Passport Registration</h1>
-      </div>
-      <div className="mainform">
+      {/* <div className="header">
+        
+      </div> */}
+      <div className="fully">
+      <h1 className="headpass">Passport Registration</h1>
+      <div className="mainform1">
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
             <label htmlFor="id">
@@ -263,6 +265,7 @@ function ApplyPassport() {
             </div>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

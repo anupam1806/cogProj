@@ -10,7 +10,7 @@ function Confirmation(){
       <h1 className='hello'>Thank you !</h1>
       <p>Thanks for using the application.  </p>
       {/* <button class="go-home"> */}
-        <a className='go-home' href="/"> Home</a>
+        <a className='go-home' href="/select"> Home</a>
       {/* </button> */}
     </div>
 </div>

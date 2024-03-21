@@ -82,9 +82,12 @@ function RenewPassport() {
 
   return (
     <div>
-      <div className="header">
-        <h1>Passport Renewal</h1>
-      </div>
+      {/* <div className="header">
+        
+      </div> */}
+      <div className="fully">
+      <h1 className="headpass">Passport Renewal</h1>
+      
       <div className="mainform">
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
@@ -219,6 +222,7 @@ function RenewPassport() {
             </div>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

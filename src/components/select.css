@@ -1,7 +1,7 @@
 * {
     padding: 0px;
     margin: 0px;
-    transition: all 0.8s ease;
+    transition: all 0.8s ease-in;
 }
 .contai {
     width: 100%;

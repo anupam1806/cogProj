@@ -80,8 +80,8 @@ function ApplyVisa() {
       <div className="mainform">
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
-            <label for="id">
-              <b>User Id</b>
+            <label htmlFor="id"  className="col-sm-4">
+              <b>User Id </b>
             </label>
             <input
               type="text"
@@ -91,8 +91,8 @@ function ApplyVisa() {
               required
             />
 
-            <label for="country">
-              <b>Country</b>
+            <label htmlFor="country"  className="col-sm-4">
+              <b>Country </b>
             </label>
             <select
               value={countryid}
@@ -113,8 +113,8 @@ function ApplyVisa() {
                 placeHolder="Select Country"
               /> */}
 
-            <label for="occupation">
-              <b>Occupation</b>
+            <label htmlFor="occupation"  className="col-sm-4">
+              <b>Occupation </b>
             </label>
             <select
               name="dog-names"
@@ -130,8 +130,8 @@ function ApplyVisa() {
               <option value="Retire Employee">Retire Employee</option>
             </select>
 
-            <label for="date">
-              <b>Date of Application</b>
+            <label htmlFor="date" className="col-sm-4">
+              <b>Date of Application </b>
             </label>
             <input
               type="date"

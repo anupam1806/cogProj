@@ -88,8 +88,8 @@ function RenewPassport() {
       <div className="mainform">
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
-          <label htmlFor="id">
-              <b>User Id</b>
+          <label htmlFor="id"  className="col-sm-4">
+              <b>User Id </b>
             </label>
             <input
               type="text"
@@ -98,14 +98,14 @@ function RenewPassport() {
               onChange={(e) => setUser(e.target.value)}
               required
             />
-          <label htmlFor="id">
-              <b>Reason of Renewal</b>
+          <label htmlFor="id"  className="col-sm-4">
+              <b>Reason of Renewal </b>
             </label>
             <input type="text" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="Enter Reason of Renewal" name="id" required />
 
             <div>
-              <label htmlFor="country">
-                <b>Country</b>
+              <label htmlFor="country"  className="col-sm-4">
+                <b>Country </b>
               </label>
 
               <select value={countryid} onChange={(e) => setCountryid(e.target.value)}>
@@ -123,8 +123,8 @@ function RenewPassport() {
                 }}
                 placeHolder="Select Country"
               /> */}
-              <label htmlFor="state">
-                <b>State</b>
+              <label htmlFor="state"  className="col-sm-4">
+                <b>State </b>
               </label>
               <select value={stateid} onChange={(e) => setStateid(e.target.value)}>
               <option value="Select--">Select--</option>
@@ -142,8 +142,8 @@ function RenewPassport() {
                 }}
                 placeHolder="Select State"
               /> */}
-              <label htmlFor="city">
-                <b>City</b>
+              <label htmlFor="city"  className="col-sm-4">
+                <b>City </b>
               </label>
               
               <select value={cityid} onChange={(e) => setCityid(e.target.value)}>
@@ -165,8 +165,8 @@ function RenewPassport() {
               /> */}
             </div>
 
-            <label for="pin">
-              <b>Pincode</b>
+            <label htmlFor="pin" className="col-sm-4">
+              <b>Pincode </b>
             </label>
             <input
               type="number"
@@ -179,8 +179,8 @@ function RenewPassport() {
               required
             />
 
-            <label for="type">
-              <b>Type of Service</b>
+            <label htmlFor="type" className="col-sm-4">
+              <b>Type of Service </b>
             </label>
             <select name="dog-names" id="dog-names" value={typeService} onChange={(e) => setTypeService(e.target.value)}>
             <option value="Select--">Select--</option>
@@ -188,8 +188,8 @@ function RenewPassport() {
               <option value="tatkal">Tatkal</option>
             </select>
 
-            <label for="booklet">
-              <b>Booklet Type</b>
+            <label htmlFor="booklet" className="col-sm-4">
+              <b>Booklet Type </b>
             </label>
             <select name="dog-names" id="dog-names" value={booklet} onChange={(e) => setBooklet(e.target.value)}>
             <option value="Select--">Select--</option>
@@ -197,8 +197,8 @@ function RenewPassport() {
               <option value="30">30 Pages</option>
             </select>
 
-            <label for="date">
-              <b>Issue Date</b>
+            <label for="date" className="col-sm-4">
+              <b>Issue Date </b>
             </label>
             <input
               type="date"

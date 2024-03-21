@@ -58,8 +58,8 @@ function CancelVisa() {
       <div className="mainform">
         <form action="*" onSubmit={submitHandler}>
           <div className="container">
-            <label for="id">
-              <b>User Id</b>
+            <label for="id"  className="col-sm-4">
+              <b>User Id </b>
             </label>
             <input
               type="text"
@@ -69,18 +69,18 @@ function CancelVisa() {
               required
             />
 
-            <label for="id">
-              <b>Passport Number</b>
+            <label for="id"  className="col-sm-4">
+              <b>Passport Number </b>
             </label>
             <input type="text" value={passport} onChange={(e) => setPassport(e.target.value)}  placeholder="Enter Passport Number" name="id" required />
 
-            <label for="id">
-              <b>Visa Number</b>
+            <label for="id"  className="col-sm-4">
+              <b>Visa Number </b>
             </label>
             <input type="text" value={visa} onChange={(e) => setVisa(e.target.value)}  placeholder="Enter Visa number" name="id" required />
 
-            <label for="date">
-              <b>Date of Issue</b>
+            <label for="date"  className="col-sm-4">
+              <b>Date of Issue </b>
             </label>
             <input
               type="date"

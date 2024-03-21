@@ -56,8 +56,8 @@ function Login() {
           <h1>Sign In</h1>
           <p>Please fill in this form to login.</p>
           <hr />
-          <label htmlFor="id">
-            <b>Customer ID</b>
+          <label htmlFor="id" className="col-sm-4">
+            <b>Customer ID </b>
           </label>
           <input
             type="text"
@@ -67,8 +67,8 @@ function Login() {
             onChange={(e) => setUserId(e.target.value)}
             required
           />
-          <label htmlFor="contact">
-            <b>Contact Number</b>
+          <label htmlFor="contact" className="col-sm-4">
+            <b>Contact Number </b>
           </label>
           <input
             type="number"
@@ -79,8 +79,8 @@ function Login() {
             onChange={(e) => setContact(e.target.value)}
             required
           />
-          <label htmlFor="psw">
-            <b>Password</b>
+          <label htmlFor="psw" className="col-sm-4">
+            <b>Password </b>
           </label>
           <input
             type="password"

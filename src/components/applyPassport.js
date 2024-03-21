@@ -126,8 +126,8 @@ function ApplyPassport() {
               ))}
             </label> */}
             <div>
-              <label htmlFor="country">
-                <b>Country</b>
+              <label htmlFor="country" className="col-sm-4">
+                <b>Country </b>
               </label>
 
               <select
@@ -147,8 +147,8 @@ function ApplyPassport() {
                 onChange={(e) => setCountryid(e.id)}
                 placeHolder="Select Country"
               /> */}
-              <label htmlFor="state">
-                <b>State</b>
+              <label htmlFor="state" className="col-sm-4">
+                <b>State </b>
               </label>
 
               <select
@@ -171,8 +171,8 @@ function ApplyPassport() {
                 }}
                 placeHolder="Select State"
               /> */}
-              <label for="city">
-                <b>City</b>
+              <label for="city" className="col-sm-4">
+                <b>City </b>
               </label>
 
               <select
@@ -198,8 +198,8 @@ function ApplyPassport() {
               /> */}
             </div>
 
-            <label for="pin">
-              <b>Pincode</b>
+            <label for="pin" className="col-sm-4">
+              <b>Pincode </b>
             </label>
             <input
               type="number"
@@ -212,8 +212,8 @@ function ApplyPassport() {
               required
             />
 
-            <label for="type">
-              <b>Type of Service</b>
+            <label for="type" className="col-sm-4">
+              <b>Type of Service </b>
             </label>
             <select
               name="dog-names"
@@ -226,8 +226,8 @@ function ApplyPassport() {
               <option value="tatkal">Tatkal</option>
             </select>
 
-            <label for="booklet">
-              <b>Booklet Type</b>
+            <label for="booklet" className="col-sm-4">
+              <b>Booklet Type </b>
             </label>
             <select
               name="dog-names"
@@ -240,8 +240,8 @@ function ApplyPassport() {
               <option value="30">30 Pages</option>
             </select>
 
-            <label for="date">
-              <b>Issue Date</b>
+            <label for="date" className="col-sm-4">
+              <b>Issue Date </b>
             </label>
             <input
               type="date"

@@ -131,13 +131,14 @@ function Registration() {
               required
             />
             <label htmlFor="email" className="col-sm-4">
-              <b>Contact Number </b>
+              <b>Contact Number  </b>
             </label>
             <input
-              type="number"
+              type="tel"
               id="contact"
               value={contact}
               placeholder="Enter Contact"
+              pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
               name="contact"
               minLength='10'
               maxlength="10"
@@ -190,7 +191,7 @@ function Registration() {
             <option value="Select--">Select--</option>
             
               <option value="What is your pet name?">What is your pet name?</option>
-              <option value="When is your birthday?">When is your birthday?</option>
+              <option value="When is your birthday?">Favourite Actor?</option>
               <option value="Favourite place?">Favourite place?</option>
               <option value="Which city you live in?">Which city you live in?</option>
             </select>

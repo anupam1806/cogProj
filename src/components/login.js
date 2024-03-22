@@ -71,9 +71,10 @@ function Login() {
             <b>Contact Number </b>
           </label>
           <input
-            type="number"
+            type="tel"
             placeholder="Enter Contact number"
             name="number"
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             value={contact}
             maxlength="10"
             onChange={(e) => setContact(e.target.value)}

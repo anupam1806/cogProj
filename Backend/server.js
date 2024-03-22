@@ -34,6 +34,35 @@ const db = mysql.createConnection({
 });
 
 
+// function getLastUserID() {
+//   return new Promise((resolve, reject) => {
+//     db.query("SELECT MAX(User_id) AS lastUserID FROM user_reg", (err, result) => {
+//       if (err) {
+//         reject(err);
+//       } else {
+//         const lastUserID = result[0].lastUserID;
+//         resolve(lastUserID);
+//       }
+//     });
+//   });
+// }
+
+// function generateNextUserID(lastUserID) {
+//   if (lastUserID) {
+//     // Assuming user IDs are in the format "PASS-1234" or "VISA-5678.9012"
+//     const prefix = lastUserID.split("-")[0];
+//     const numericPart = parseFloat(lastUserID.split("-")[1]);
+//     const nextNumericPart = numericPart + 1;
+
+//     const nextUserID = `${prefix}-${nextNumericPart.toFixed(4)}`;
+//     return nextUserID;
+//   } else {
+//     console.error("Error: lastUserID is undefined.");
+//     return null;
+//   }
+// }
+
+
 
 function getLastUserID(applyType) {
 
@@ -94,6 +123,15 @@ app.post("/submit", (req, res) => {
   const hint = req.body.hint;
   const hintAnswer = req.body.hintAnswer;
   var userId,password;
+
+
+  try {
+    const lastUserID = getLastUserID();
+    const nextUserID = generateNextUserID(lastUserID);
+    console.log(`Next User ID: ${nextUserID}`);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 
   
   if(applyType === "NA"){
@@ -166,8 +204,8 @@ app.post("/applyvisa", (req, res) => {
   console.log(`Application Permit: ${applicationPermit}`);
 
   db.query(
-    "INSERT INTO apply_visa (User_id,Country,Occupation,Application_Date) VALUES(?,?,?,?)",
-    [user,countryid,occupation,date],
+    "INSERT INTO apply_visa (User_id,Country,Occupation,Application_Date,visaNo,VisaStatus) VALUES(?,?,?,?,?,?)",
+    [user,countryid,occupation,date,visaApp,'Applied'],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -188,8 +226,10 @@ app.post("/cancel", (req, res) => {
   // const visa = req.body.visa;
   // const doi = req.body.doi;
 
+  const query = `UPDATE apply_visa SET VisaStatus = 'Cancelled' WHERE User_id = ?;`;
+
   db.query(
-    "DELETE FROM apply_visa where User_id=?",
+    query,
     [user],
     (err, result) => {
       if (err) {
@@ -273,8 +313,8 @@ app.post("/applyPassport", (req, res) => {
   console.log(`Expiry Date: ${expiry}`);
 
   db.query(
-    "INSERT INTO apply_passport (User_id,Country,State,City,Pincode,ServiceType,BookletType,Issued_date) VALUES(?,?,?,?,?,?,?,?)",
-    [user,countryid,stateid, cityid,pincode,typeService,booklet,issue],
+    "INSERT INTO apply_passport (User_id,Country,State,City,Pincode,ServiceType,BookletType,Issued_date,passportNo) VALUES(?,?,?,?,?,?,?,?,?)",
+    [user,countryid,stateid, cityid,pincode,typeService,booklet,issue,passportNumber],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -381,6 +421,44 @@ app.get('/renew', (req, res) => {
     }
   });
 });
+
+app.get('/populate', (req,res) => {
+
+  const user = req.body.user;
+  const countryid = req.body.countryid;
+  const stateid = req.body.stateid;
+  const cityid = req.body.cityid;
+  const pincode = req.body.pincode;
+  const booklet = req.body.booklet;
+  const typeService = req.body.typeService;
+  let issue = req.body.issue;
+
+  const query = `SELECT * FROM apply_passport WHERE User_id = ?;`;
+  db.query(query,[user],(err, results) => {
+    if (err) {
+      console.error('Error fetching data from MySQL:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      const responseObj = {
+        countryid: countryid,
+        stateid: stateid,
+        cityid: cityid,
+        pincode: pincode,
+        booklet: booklet,
+        typeService: typeService,
+        issue: issue
+      };
+      res.json(responseObj);
+    }
+  });
+});
+
+app.get('/logout', (req, res) => {
+  req.session.destroy(); // Clear the session
+  res.clearCookie('connect.sid'); // Delete the session cookie
+  res.redirect('/'); // Redirect to the login page
+});
+
 
 app.listen(8000, () => {
   console.log("Listening on port 8000");

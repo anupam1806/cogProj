@@ -24,7 +24,7 @@ function RenewPassport() {
   const [booklet, setBooklet] = useState("");
   const [typeService, setTypeService] = useState("");
   const [issue, setIssue] = useState("");
-
+  const [data,setData] = useState("");
   const [coi, setCoi] = useState([]);
   const [user, setUser] = useState("");
 
@@ -46,6 +46,13 @@ function RenewPassport() {
     fetch('http://localhost:8000/renew')
       .then(response => response.json())
       .then(data => setCoi(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/populate')
+      .then(response => response.json())
+      .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 

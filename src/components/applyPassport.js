@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 // } from "react-country-state-city";
 // import { useAuth } from './authContext';
 import "react-country-state-city/dist/react-country-state-city.css";
+import LogoutButton from "./Logout";
 
 function ApplyPassport() {
 
@@ -95,6 +96,7 @@ function ApplyPassport() {
         <Link to="/renewpassport">
           <button className="nav-button">Passport Renewal</button>
         </Link>
+        <LogoutButton />
       </nav>
       {/* <div className="header">
         

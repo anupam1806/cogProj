@@ -44,7 +44,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="full">
       <nav className="nav">
         <Link to="/signup">
           <button className="nav-button">Register</button>

@@ -93,10 +93,10 @@ function ApplyPassport() {
       {/* {isAuthenticated ? (
         <> */}
       <nav className="nav">
-        <Link to="/renewpassport">
-          <button className="nav-button">Passport Renewal</button>
-        </Link>
+        <Link to="/signin">
         <LogoutButton />
+        </Link>
+        
       </nav>
       {/* <div className="header">
         
@@ -205,14 +205,9 @@ function ApplyPassport() {
             <label for="pin" className="col-sm-4">
               <b>Pincode </b>
             </label>
-            <input
-              type="number"
-              placeholder="Enter Pincode"
-              maxLength="6"
-              minLength="6"
+            <input type="number" id="pincode" name="pincode" pattern="^[0-9]{6}$" title="Please enter exactly 6 digits"
               value={pincode}
               onChange={(e) => setPincode(e.target.value)}
-              name="pincode"
               required
             />
 
@@ -258,7 +253,7 @@ function ApplyPassport() {
             />
 
             <div className="clearfix">
-              <button type="reset" className="cancelbtn">
+              <button type="reset" value="reset" className="cancelbtn">
                 Reset
               </button>
               <button type="submit" className="signup">

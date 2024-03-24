@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
+import LogoutButton from "./components/Logout";
 import Delete from "./components/delete/button";
 
 function CancelVisa() {
@@ -74,6 +75,12 @@ function CancelVisa() {
     <div>
       {/* <div className="head">
       </div> */}
+      <nav className="nav">
+        <Link to="/signin">
+        <LogoutButton />
+        </Link>
+        
+      </nav>
       <div className="visafull">
       <h1 className="headvisa">Visa Cancellation</h1>
       <div className="mainform">

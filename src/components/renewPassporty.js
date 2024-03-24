@@ -6,7 +6,8 @@ import "./applyPassport.css";
 //   CountrySelect,
 //   StateSelect,
 // } from "react-country-state-city";
-import {  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import LogoutButton from "./Logout";
 import "react-country-state-city/dist/react-country-state-city.css";
 
 function RenewPassport() {
@@ -109,6 +110,12 @@ function RenewPassport() {
       {/* <div className="header">
         
       </div> */}
+      <nav className="nav">
+        <Link to="/signin">
+        <LogoutButton />
+        </Link>
+        
+      </nav>
       <div className="fully">
       <h1 className="headpass">Passport Renewal</h1>
       

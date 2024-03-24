@@ -4,6 +4,7 @@ import axios from "axios";
 //   CountrySelect
 // } from "react-country-state-city";
 import { Link, useNavigate } from "react-router-dom";
+import LogoutButton from "./Logout";
 import "react-country-state-city/dist/react-country-state-city.css";
 
 function ApplyVisa() {
@@ -72,8 +73,8 @@ function ApplyVisa() {
   return (
     <div>
       <nav className="nav">
-        <Link to="/cancelvisa">
-          <button className="nav-button">Visa Cancellation</button>
+        <Link to="/signin">
+        <LogoutButton />
         </Link>
       </nav>
       {/* <div className="head"></div> */}

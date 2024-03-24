@@ -20,13 +20,16 @@ function ApplyPassport() {
   const [countryid, setCountryid] = useState("");
   const [stateid, setStateid] = useState("");
   const [cityid, setCityid] = useState("");
+
+  const [data, setData] = useState(null);
+
   // const[selectedValue,setSelectedValue] = useState("");
   // const [dropdownValues,setDropdown] = useState([]);
   const [pincode, setPincode] = useState("");
   const [booklet, setBooklet] = useState("");
   const [typeService, setTypeService] = useState("");
   const [issue, setIssue] = useState("");
-  const [coi, setCoi] = useState([]);
+  const [, setCoi] = useState([]);
   const [, setUsers] = useState([]);
   const [user, setUser] = useState("");
 
@@ -88,6 +91,36 @@ function ApplyPassport() {
       });
   };
 
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/data')
+        .then(response => {
+            setData(response.data);
+        });
+}, []);
+
+const handleCountryChange = (event) => {
+    setCountryid(event.target.value);
+    setStateid('');
+    setCityid('');
+};
+
+const handleStateChange = (event) => {
+    setStateid(event.target.value);
+    setCityid('');
+};
+
+const handleCityChange = (event) => {
+    setCityid(event.target.value);
+};
+
+if (!data) {
+    return <div>Loading...</div>;
+}
+
+
+
   return (
     <div>
       {/* {isAuthenticated ? (
@@ -134,7 +167,17 @@ function ApplyPassport() {
                 <b>Country </b>
               </label>
 
-              <select
+
+              <select value={countryid} onChange={handleCountryChange}>
+                <option value="">Select Country</option>
+                {Object.keys(data).map((countryid) => (
+                    <option key={countryid} value={countryid}>{countryid}</option>
+                ))}
+            </select>
+
+
+
+              {/* <select
                 value={countryid}
                 onChange={(e) => setCountryid(e.target.value)}
               >
@@ -144,7 +187,7 @@ function ApplyPassport() {
                     {user.country}
                   </option>
                 ))}
-              </select>
+              </select> */}
 
               {/* <CountrySelect
               // value={(e) => setCountryName(e.name)}
@@ -155,7 +198,19 @@ function ApplyPassport() {
                 <b>State </b>
               </label>
 
-              <select
+
+              <select value={stateid} onChange={handleStateChange}>
+                <option value="">Select State</option>
+                {countryid && data[countryid].states.map((stateid) => (
+                    <option key={stateid} value={stateid}>{stateid}</option>
+                ))}
+            </select>
+
+
+
+
+
+              {/* <select
                 value={stateid}
                 onChange={(e) => setStateid(e.target.value)}
               >
@@ -165,7 +220,7 @@ function ApplyPassport() {
                     {user.state}
                   </option>
                 ))}
-              </select>
+              </select> */}
 
               {/* <StateSelect
                 countryid={countryid}
@@ -179,7 +234,18 @@ function ApplyPassport() {
                 <b>City </b>
               </label>
 
-              <select
+
+
+              <select value={cityid} onChange={handleCityChange}>
+                <option value="">Select City</option>
+                {stateid && data[countryid].cities[stateid].map((cityid) => (
+                    <option key={cityid} value={cityid}>{cityid}</option>
+                ))}
+            </select>
+
+
+
+              {/* <select
                 value={cityid}
                 onChange={(e) => setCityid(e.target.value)}
               >
@@ -189,7 +255,7 @@ function ApplyPassport() {
                     {user.city}
                   </option>
                 ))}
-              </select>
+              </select> */}
 
               {/* <CitySelect
                 countryid={countryid}

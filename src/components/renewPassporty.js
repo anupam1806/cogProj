@@ -15,7 +15,6 @@ function RenewPassport() {
 
   const navigate = useNavigate();
 
-  // const [countryid, setCountryid] = useState(0);
   const [reason, setReason] = useState("");
   const [countryid, setCountryid] = useState("");
   const [stateid, setStateid] = useState("");
@@ -24,7 +23,6 @@ function RenewPassport() {
   const [booklet, setBooklet] = useState("");
   const [typeService, setTypeService] = useState("");
   const [issue, setIssue] = useState("");
-  const [data,setData] = useState("");
   const [coi, setCoi] = useState([]);
   const [user, setUser] = useState("");
 
@@ -50,11 +48,30 @@ function RenewPassport() {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8000/populate')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+    console.log("User has a id"+user);
+    fetch('http://localhost:8000/populate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      setCountryid(data.countryid);
+      setStateid(data.stateid);
+      setCityid(data.cityid);
+      setPincode(data.pincode);
+      setBooklet(data.booklet);
+      setTypeService(data.typeService);
+      setIssue(data.issue);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }, [user]); // add user as a dependency to the useEffect hook
+  
+  
 
   const submitHandler = (e) => {
     e.preventDefault();

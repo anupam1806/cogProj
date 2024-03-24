@@ -71,7 +71,7 @@ function Login() {
             <b>Contact Number </b>
           </label>
           <input
-            type="tel"
+            type="number"
             placeholder="Enter Contact number"
             name="number"
             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"

@@ -134,7 +134,7 @@ function Registration() {
               <b>Contact Number  </b>
             </label>
             <input
-              type="tel"
+              type="number"
               id="contact"
               value={contact}
               placeholder="Enter Contact"

@@ -29,6 +29,25 @@ function CancelVisa() {
     .catch(err => console.log(err))
   }, [navigate]);
 
+  useEffect(() => {
+    console.log("User has a id"+user);
+    fetch('http://localhost:8000/visapop', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      setPassport(data.passportNo);
+      setVisa(data.visaNo);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }, [user]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     axios

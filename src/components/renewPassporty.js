@@ -24,7 +24,7 @@ function RenewPassport() {
   const [booklet, setBooklet] = useState("");
   const [typeService, setTypeService] = useState("");
   const [issue, setIssue] = useState("");
-  const [coi, setCoi] = useState([]);
+  const [, setCoi] = useState([]);
   const [user, setUser] = useState("");
   const [data, setData] = useState("");
 

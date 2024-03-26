@@ -28,10 +28,11 @@ function Login() {
 
   const auth = (e) => {
     e.preventDefault();
+    // axios(path,parameters).then(actions)
       axios.post("http://localhost:8000/authenticate", {
         userId: userId,
         contact: contact,
-        password: password,
+        password: password
       }).then(res =>{
         if(res.data.Login){
           navigate('/select')
@@ -49,6 +50,7 @@ function Login() {
         <Link to="/signup">
           <button className="nav-button">Register</button>
         </Link>
+        <a className="headlink" href="/"><h4 className="heading">Passport & Visa Management</h4> </a>
       </nav>
       <div className="mainform">
       <form className="modal-content" onSubmit={auth}>
@@ -87,7 +89,6 @@ function Login() {
             type="password"
             placeholder="Enter Password"
             name="psw"
-            
             pattern="/^[a-zA-Z0-9!@#\$%\^\&*_=+-]{9}$/g"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

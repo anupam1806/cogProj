@@ -426,13 +426,14 @@ app.post("/renewPassport", (req, res) => {
         ServiceType = ?,
         BookletType = ?,
         Issued_date = ?,
-        reason_for_renewal = ?
+        reason_for_renewal = ?,
+        passportNo = ?
     WHERE User_id = ?;
   `;
 
   db.query(
     query,
-    [countryid,stateid, cityid,pincode,typeService,booklet,issue,reason,user],
+    [countryid,stateid, cityid,pincode,typeService,booklet,issue,reason,passportNumber,user],
     (err, result) => {
       if (err) {
         console.log(err);

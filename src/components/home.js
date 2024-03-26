@@ -16,7 +16,7 @@ function Home() {
     <div class="bg"></div>
     <div class="container column bg-column__center">
       <h1 class="title">
-        Don't miss out our application!
+        Passport and Visa App!
       </h1>
       <p class="subheading">
         Apply for passport and visa on our application.
@@ -36,23 +36,25 @@ function Home() {
       <main class="main-content">
         <h2 class="main-title">About Us</h2>
         <div class="section-info">
-          <p class="section-info__para">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p class="section-info__para">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-          </p>
-          <p class="section-info__para">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          <p class="section-info__para justi">
+          A passport and visa management system is a digital platform designed to streamline the
+           process of issuing passports and visas. It typically includes features such as online 
+           application submission, document verification, appointment scheduling, fee payment, and 
+           status tracking. These systems aim to enhance efficiency, reduce processing times, improve 
+           security measures, and provide better user experience for travelers and government 
+           authorities alike. Additionally, they may integrate with immigration databases and
+            biometric systems for enhanced security and identity verification.
           </p>
         </div>
       </main>
       <aside class="aside-content">
         <div class="aside-card">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        A passport is an essential travel document that verifies a person's identity and citizenship, 
+        allowing them to cross international borders legally.
         </div>
         <div class="aside-card aside-card-imp">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        A visa is an endorsement on a passport that grants permission for entry into a
+         specific country for a designated purpose and duration.
         </div>
       </aside>
     </div>

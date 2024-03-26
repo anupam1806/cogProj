@@ -1,9 +1,18 @@
 import React from "react";
 import "./select.css";
+import { Link } from "react-router-dom";
+import LogoutButton from "./Logout";
 
 function Select() {
   return (
     <div>
+        <nav className="nav">
+        <Link to="/signin">
+        <LogoutButton />
+        </Link>
+        <a className="headlink" href="/"><h4 className="heading">Passport & Visa Management</h4> </a>
+        
+      </nav>
       <div className="contai">
 
           <div className="one">

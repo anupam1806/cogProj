@@ -203,6 +203,11 @@ h3 {
   color:lightgray;
   text-decoration:underline;
 }
+.justi{
+  text-align: justify;
+  text-justify: inter-word;
+  margin-top: 10px;
+}
 /*  */
 /*  */
 /*  */

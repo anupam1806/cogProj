@@ -26,6 +26,7 @@ function RenewPassport() {
   const [issue, setIssue] = useState("");
   const [coi, setCoi] = useState([]);
   const [user, setUser] = useState("");
+  const [data, setData] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:8000/username")
@@ -105,6 +106,28 @@ function RenewPassport() {
       });
   };
 
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/data')
+        .then(response => {
+            setData(response.data);
+        });
+}, []);
+
+  const handleCountryChange = (event) => {
+    setCountryid(event.target.value);
+    setStateid('');
+    setCityid('');
+};
+
+const handleStateChange = (event) => {
+    setStateid(event.target.value);
+    setCityid('');
+};
+
+const handleCityChange = (event) => {
+    setCityid(event.target.value);
+};
+
   return (
     <div>
       {/* <div className="header">
@@ -114,6 +137,7 @@ function RenewPassport() {
         <Link to="/signin">
         <LogoutButton />
         </Link>
+        <a className="headlink" href="/"><h4 className="heading">Passport & Visa Management</h4> </a>
         
       </nav>
       <div className="fully">
@@ -142,14 +166,21 @@ function RenewPassport() {
                 <b>Country </b>
               </label>
 
-              <select value={countryid} onChange={(e) => setCountryid(e.target.value)}>
+              <select value={countryid} onChange={handleCountryChange}>
+                <option value="">Select Country</option>
+                {Object.keys(data).map((countryid) => (
+                    <option key={countryid} value={countryid}>{countryid}</option>
+                ))}
+            </select>
+
+              {/* <select value={countryid} onChange={(e) => setCountryid(e.target.value)}>
               <option value="Select--">Select--</option>
               {coi.map(user => (
         <option value={user.id} key={user.id}>
           {user.country}
         </option>
       ))}
-              </select>
+              </select> */}
 
               {/* <CountrySelect
                 onChange={(e) => {
@@ -160,14 +191,22 @@ function RenewPassport() {
               <label htmlFor="state"  className="col-sm-4">
                 <b>State </b>
               </label>
-              <select value={stateid} onChange={(e) => setStateid(e.target.value)}>
+              <select value={stateid} onChange={handleStateChange}>
+                <option value="">Select State</option>
+                {countryid && data[countryid].states.map((stateid) => (
+                    <option key={stateid} value={stateid}>{stateid}</option>
+                ))}
+            </select>
+
+
+              {/* <select value={stateid} onChange={(e) => setStateid(e.target.value)}>
               <option value="Select--">Select--</option>
               {coi.map(user => (
         <option value={user.id} key={user.id}>
           {user.state}
         </option>
       ))}
-              </select>
+              </select> */}
 
               {/* <StateSelect
                 countryid={countryid}
@@ -179,15 +218,24 @@ function RenewPassport() {
               <label htmlFor="city"  className="col-sm-4">
                 <b>City </b>
               </label>
+
+              <select value={cityid} onChange={handleCityChange}>
+                <option value="">Select City</option>
+                {stateid && data[countryid].cities[stateid].map((cityid) => (
+                    <option key={cityid} value={cityid}>{cityid}</option>
+                ))}
+            </select>
               
-              <select value={cityid} onChange={(e) => setCityid(e.target.value)}>
+
+              
+              {/* <select value={cityid} onChange={(e) => setCityid(e.target.value)}>
               <option value="Select--">Select--</option>
               {coi.map(user => (
         <option value={user.id} key={user.id}>
           {user.city}
         </option>
       ))}
-              </select>
+              </select> */}
 
               {/* <CitySelect
                 countryid={countryid}

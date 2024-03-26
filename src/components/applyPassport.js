@@ -129,6 +129,7 @@ if (!data) {
         <Link to="/signin">
         <LogoutButton />
         </Link>
+        <a className="headlink" href="/"><h4 className="heading">Passport & Visa Management</h4> </a>
         
       </nav>
       {/* <div className="header">

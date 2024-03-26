@@ -12,6 +12,7 @@ function Navbar() {
         <Link to="/signin">
           <button className="nav-button">Login</button>
         </Link>
+        <a className="headlink" href="/"><h4 className="heading">Passport & Visa Management</h4> </a>
       </nav>
     </>
   );

@@ -1,11 +1,13 @@
 .nav{
     background-color: #000000;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     direction: rtl;
-    align-items: flex-end;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
     color: black;
-    
+    font-size: 1.5rem;
   }
   .nav-button{
     width: 95%;
@@ -13,4 +15,12 @@
     background-color: #fff;
     color: #000000;
     margin-bottom: 7px;
+    font-size: 1rem;
+    padding: 10px;
+  }
+  .heading{
+    color: #fff;
+  }
+  .headlink{
+    text-decoration: none;
   }

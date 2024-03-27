@@ -55,3 +55,13 @@ h1 {
   margin-bottom: 10px;
   color: darkslategrey;
 }
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* For Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

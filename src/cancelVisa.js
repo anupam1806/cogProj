@@ -121,7 +121,15 @@ function CancelVisa() {
             />
 
             <div className="clearfix">
-              <button type="reset" className="cancelbtn">
+            <button
+                type="reset"
+                className="cancelbtn"
+                onClick={() => {
+                  setPassport("");
+                  setVisa("");
+                  setDoi("");
+                }}
+              >
                 Reset
               </button>
               {/* <button type="submit"> */}

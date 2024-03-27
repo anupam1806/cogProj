@@ -73,15 +73,20 @@ function Login() {
             <b>Contact Number </b>
           </label>
           <input
-            type="number"
-            placeholder="Enter Contact number"
-            name="number"
-            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-            value={contact}
-            maxlength="10"
-            onChange={(e) => setContact(e.target.value)}
-            required
-          />
+              type="number"
+              id="contact"
+              value={contact}
+              placeholder="Enter Contact"
+              pattern="[0-9]{10,10}"
+              name="contact"
+              maxlength="10"
+              onChange={(e) => {
+                if (e.target.value.length <= 10) {
+                  setContact(e.target.value);
+                }
+              }}
+              required
+            />
           <label htmlFor="psw" className="col-sm-4">
             <b>Password </b>
           </label>
@@ -96,9 +101,17 @@ function Login() {
           />
 
           <div className="clearfix">
-            <button type="button" className="cancelbtn">
-              Cancel
-            </button>
+          <button
+                type="reset"
+                className="cancelbtn"
+                onClick={() => {
+                  setUserId("");
+                  setContact("");
+                  setPassword("");
+                }}
+              >
+                Reset
+              </button>
             <button type="submit" className="signup">
               Sign In
             </button>

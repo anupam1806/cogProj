@@ -272,9 +272,17 @@ if (!data) {
             <label for="pin" className="col-sm-4">
               <b>Pincode </b>
             </label>
-            <input type="number" id="pincode" name="pincode" pattern="^[0-9]{6}$" title="Please enter exactly 6 digits"
+            <input type="number" 
+              id="pincode" 
+              name="pincode" 
+              pattern="^[0-9]{6}$" 
+              title="Please enter exactly 6 digits"
               value={pincode}
-              onChange={(e) => setPincode(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value.length <= 6) {
+                  setPincode(e.target.value);
+                }
+              }}
               required
             />
 
@@ -320,7 +328,14 @@ if (!data) {
             />
 
             <div className="clearfix">
-              <button type="reset" value="reset" className="cancelbtn">
+            <button
+                type="reset"
+                className="cancelbtn"
+                onClick={() => {
+                  setPincode("");
+                  setIssue("");
+                }}
+              >
                 Reset
               </button>
               <button type="submit" className="signup">

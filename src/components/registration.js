@@ -3,27 +3,27 @@ import axios from "axios";
 import "../components/navbar/navbar.css";
 import "./registration.css";
 // import Navbar from "./navbar/navbar";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Registration() {
   const [firstName, setFirst] = useState("");
   const [lastName, setLast] = useState("");
-  const [dob,setDob] = useState("");
-  const [address,setAddress] = useState("");
-  const [contact,setContact] = useState("");
-  const [email,setEmail] = useState("");
-  const [qualification,setQualification] = useState("");
-  const [gender,setGender] = useState("");
-  const [applyType,setApplyType] = useState("");
-  const [hint,setHint] = useState("");
-  const [hintAnswer,setHintAns] = useState("");
+  const [dob, setDob] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [qualification, setQualification] = useState("");
+  const [gender, setGender] = useState("");
+  const [applyType, setApplyType] = useState("");
+  const [hint, setHint] = useState("");
+  const [hintAnswer, setHintAns] = useState("");
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setApplyType(e.target.value);
-    console.log('Selected value:', e.target.value);
-  }
+    console.log("Selected value:", e.target.value);
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ function Registration() {
         gender: gender,
         applyType: applyType,
         hint: hint,
-        hintAnswer: hintAnswer
+        hintAnswer: hintAnswer,
       })
       .then((res) => {
         // const { userId, password } = data.;
@@ -48,10 +48,10 @@ function Registration() {
         // console.log(userId);
         // console.log(password);
         // alert(password);
-        alert(`Your user Id is ${userId} and password is ${password}.`)
+        alert(`Your user Id is ${userId} and password is ${password}.`);
         // console.log(res.data);
-        
-        navigate('/signin')
+
+        navigate("/signin");
         // console.log(res);
         setFirst("");
         setLast("");
@@ -73,9 +73,11 @@ function Registration() {
         <Link to="/signin">
           <button className="nav-button">Login</button>
         </Link>
-        <a className="headlink" href="/"><h4 className="heading">Passport & Visa Management</h4> </a>
+        <a className="headlink" href="/">
+          <h4 className="heading">Passport & Visa Management</h4>{" "}
+        </a>
       </nav>
-      
+
       <div className="mainform">
         <form className="modal-content" onSubmit={submitHandler}>
           <div className="container">
@@ -115,7 +117,7 @@ function Registration() {
               value={dob}
               placeholder="Enter DOB"
               name="dob"
-              max={new Date().toISOString().split('T')[0]}
+              max={new Date().toISOString().split("T")[0]}
               onChange={(e) => setDob(e.target.value)}
               required
             />
@@ -132,18 +134,21 @@ function Registration() {
               required
             />
             <label htmlFor="email" className="col-sm-4">
-              <b>Contact Number  </b>
+              <b>Contact Number </b>
             </label>
             <input
               type="number"
               id="contact"
               value={contact}
               placeholder="Enter Contact"
-              pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+              pattern="[0-9]{10,10}"
               name="contact"
-              minLength='10'
               maxlength="10"
-              onChange={(e) => setContact(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value.length <= 10) {
+                  setContact(e.target.value);
+                }
+              }}
               required
             />
             <label htmlFor="email" className="col-sm-4">
@@ -155,7 +160,6 @@ function Registration() {
               value={email}
               placeholder="Enter Email"
               name="email"
-            
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -175,7 +179,7 @@ function Registration() {
               <b>Gender </b>
             </label>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option value="Select--">Select--</option>
+              <option value="Select--">Select--</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
@@ -183,20 +187,26 @@ function Registration() {
               <b>Apply Type </b>
             </label>
             <select value={applyType} onChange={handleChange}>
-            <option value="Select--">Select--</option>
+              <option value="Select--">Select--</option>
               <option value="Passport">Passport</option>
               <option value="Visa">Visa</option>
             </select>
-            <label htmlFor="email" className="col-sm-4"><b>Hint Question </b> </label>
+            <label htmlFor="email" className="col-sm-4">
+              <b>Hint Question </b>{" "}
+            </label>
             <select value={hint} onChange={(e) => setHint(e.target.value)}>
-            <option value="Select--">Select--</option>
-            
-              <option value="What is your pet name?">What is your pet name?</option>
+              <option value="Select--">Select--</option>
+
+              <option value="What is your pet name?">
+                What is your pet name?
+              </option>
               <option value="When is your birthday?">Favourite Actor?</option>
               <option value="Favourite place?">Favourite place?</option>
-              <option value="Which city you live in?">Which city you live in?</option>
+              <option value="Which city you live in?">
+                Which city you live in?
+              </option>
             </select>
-            
+
             <label htmlFor="email" className="col-sm-4">
               <b>Hint Answer </b>
             </label>
@@ -211,7 +221,21 @@ function Registration() {
             />
 
             <div className="clearfix">
-              <button type="button" className="cancelbtn">
+              <button
+                type="reset"
+                className="cancelbtn"
+                onClick={() => {
+                  setFirst("");
+                  setLast("");
+                  setQualification("");
+                  setEmail("");
+                  setDob("");
+                  setAddress("");
+                  setContact("");
+                  setHintAns("");
+
+                }}
+              >
                 Reset
               </button>
               <button type="submit" className="signup">

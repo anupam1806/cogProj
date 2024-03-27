@@ -17,13 +17,13 @@ function Select() {
 
           <div className="one">
               <div className="content">
-                  <a href="/passport" className="bn">Passport</a>
+                  <a href="/passport" className="bn">Passport Registration</a>
               </div>
           </div>
 
           <div className="two">
               <div className="content">
-                  <a href="/visa" className="bn">Visa</a>
+                  <a href="/visa" className="bn">Visa Registration</a>
               </div>
           </div>
 

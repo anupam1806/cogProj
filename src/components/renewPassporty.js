@@ -292,7 +292,15 @@ const handleCityChange = (event) => {
             />
 
             <div className="clearfix">
-              <button type="reset" className="cancelbtn">
+            <button
+                type="reset"
+                className="cancelbtn"
+                onClick={() => {
+                  setPincode("");
+                  setReason("");
+                  setIssue("");
+                }}
+              >
                 Reset
               </button>
               <button type="submit" className="signup">

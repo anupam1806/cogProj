@@ -148,7 +148,15 @@ function ApplyVisa() {
             />
 
             <div className="clearfix">
-              <button type="reset" className="cancelbtn">
+            <button
+                type="reset"
+                className="cancelbtn"
+                onClick={() => {
+                  setCountryid("");
+                  setOccupation("");
+                  setDate("");
+                }}
+              >
                 Reset
               </button>
               <button type="submit" className="signup">
